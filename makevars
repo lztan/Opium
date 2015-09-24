@@ -1,0 +1,12 @@
+CC=gcc
+CFLAGS=-I../include -I../FlexiLib -I../uniPPlib -g -O2 -DCSYS=\"'Linux 3.10.3-1-ARCH unknown'\" -DCHOST=\"hoponpop\" -DCDATE=\"'Fri Aug 28 16:56:38 EDT 2015'\" 
+CPP=gcc -E
+FC=gfortran
+FFLAGS=-g -O2
+FPP=/usr/bin/cpp
+FPPFLAGS=
+LD=gfortran
+LDFLAGS=-lm -fdefault-real-8 -fno-automatic  -lm  -L/usr/lib/gcc/x86_64-unknown-linux-gnu/4.8.1 -L/usr/lib/gcc/x86_64-unknown-linux-gnu/4.8.1/../../../../lib -L/lib/../lib -L/usr/lib/../lib -L/usr/lib/gcc/x86_64-unknown-linux-gnu/4.8.1/../../.. -lgfortran -lm -lgcc_s -lquadmath
+RANLIB=ranlib
+AR=/usr/bin/ar
+NOOPT=-O0

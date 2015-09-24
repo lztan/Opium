@@ -1,0 +1,443 @@
+
+Opium changelog
+
+
+1.0.1 --> 1.0.2
+
+	1) Further improvement of handling of s,p,d ordering problem
+	   Tried the following tests for .pwf, .ncpp, and .fhi output styles:
+	    Ag - 4d,5s,5p valence ordering s-local
+	    Ag - 5s,5p,4d                  s-local
+	    Ag - 4d,5s,5p                  local not specified (check default = s NOT 1st state)
+
+	    Ti - 3s,3p,3d,4s,4p            s-local
+	    Ti - 3s,4s,3p,4p,3d            s-local
+	    Ti - 3s,3p,4s,4p,3d            '0' local (l=0)
+
+	    Li - 1s,2s,2p                  local not specified
+	    Li - 1s,2p,2s                  local not specified
+	    
+	    For each group, bh, abinit, and pwscf give the same results to ~8 digits.
+
+	2)  Code should be totally case insensitive (all strcmp's replaced with strcasecmp).
+
+	3)  Param file appened to fhi, ncpp files (thanks Wissam!)
+
+	4)  Plot help 'vi' example corrected.
+
+        5)  Added fclose() in do_nl.c (thanks Keith!)
+
+        6)  Configure script modifed to allow LDFLAGS to be appended from command line
+
+        7)  Fixed spelling of Schrodinger in descreen.f
+ 
+        8)  AE and PS eigenvalues were actually reversed in descreen.f (they are
+            identical so no big deal).
+
+        9)  Fixed bug in nllogd for KB log-derivative (missed common block)
+ 
+        10) Adjusted do_logplt so 'ae ps nl' need not be repeated to make plot (thanks Rongqin!)
+
+        11) Added line for refernece energy in logder plot (thanks Rongqin!)
+
+        12) Modified treatment of unbound states to work with semicore (thanks Sara!)
+
+        13) Modified output for .ncpp and .fhi to indicate PW XC correctly
+
+        14) Changed MacOSX configure defs so -r8 included by default
+
+        15) Major modfication of ghost state reporting, now states whether ghost testing
+            was inconclusive (no bound states for local potential)
+
+        16) Ghost testing added for unbound states as local or non-local
+
+        17) Interp.f output cleaned up
+
+        18) Logder plotting states that no [loginfo] key block is set (not just a core dump!)
+
+        19) Fixed legends for plots that were not correct
+
+8/19/04 - EJW
+
+
+
+1.0.2 --> 1.0.3
+
+1) Ghost testing fixed, removed the '?' output if a local state was
+not bound.  Now this eigenvalue is treated as if its eigenvalue = 0.0
+
+2) Changed the way an unbound state is selected.  Now, if the filling
+is set to <-1.0e-12, the state is treated as unbound (and treated as
+if it is empty).  The eigenvalue is fixed by the guess or set to 0.0
+if no guess specified.
+
+3) Added the .recpot output format routines (contributed by Keith
+Refson).  This format is native to the solid state code CASTEP.
+
+4) Added GNU license information, license header prepended to every .f
+.c and .h file and added a "COPYING" file which contains the full-text
+of the license.
+
+5) Fixed bug related to DNL in the PWF format (introduced in the
+previous version).
+
+6) Added the Fuchs + Scheffler partial core correction method which is
+implemented in fhi98pp.
+
+7) Fixed bug related to labeling the eigenvalues in the logdplot
+
+8) Changed keyblock help to reflect #2 and #6 above.
+
+9) Configure script changed such that ifort and ifc libcxa gets
+statically linked (requested by Keith Refson).
+
+10) Added true NULL characters to nwrite calls in writepwf for better
+compatibility.
+
+10/12/04 - EJW
+
+
+1.0.3 --> 2.0.1
+
+1) Troullier-Martins potential method added 
+
+2) Cleaned up plotting output
+
+3) Added calculation of the convergence of the kinetic energy error, output is sent to both rpt and log file
+
+4) Can now plot the KE convergence
+
+5) Explicit annoucement of the presnece of ghost states in the rpt file
+
+6) Changed configure script to generate ONE set of makevars such that users can edit them if configure fails
+
+7) Added listing of compile and execution platform in log file
+
+8) Fixed some errors in the element symbol table
+
+9) Increased number of keyblock reads so that keyblocks ending in string reads don't screw things up.
+
+10) Added the ability to set an environmental variable called $XMGRACE_OPTS which is included in the command-line call to xmgrace.
+
+11) Increased the dimensions of all parameters such that 5f elements can be constructed
+
+9/10/05 - EJW
+
+2.0.1 --> 2.0.2
+
+1) Bug fix for ncpp (PWSCF) style output.  Wavefunctions had wrong number of r's in 1.0.2, 1.0.3, and 2.0.1.  See doc/README_solidstatecodes
+for more information.
+
+
+2.0.2 --> 2.0.3
+
+1) Bug fix for f-projectors in .pwf output format
+
+2) Applied patch from Keith Refson to repair .recpot output format
+3) Some (but not all) sprintf statments changed to snprintf
+
+4) BETA level implementation of .psf (siesta) format and .cpmd (CPMD) output format,
+see 'opium -c' for more information
+
+5) GGA functional allows for smoothing near the origin (see 'opium -k' for how to
+invoke).
+
+6) Corrections to KE convergence output when semicore states are involved.  Now the
+KE convergence of all valence orbitals is computed.
+
+2.0.3 --> 2.0.4
+
+1) .pwf output file now contains the wavefunctions from the MOST RECENT configuration 
+at the time of generation.  For example, 
+
+> ./opium al log ae ps nl pwf 
+
+will include the wavefunctions of the reference state but, 
+
+> ./opium al log ae ps nl tc pwf 
+
+will include the wavefunctions of the last test configuration.
+
+This is done since often the reference is not the desired ground state atomic
+configuration.
+
+The log file also reports which configuration was used.
+
+2) (finally) included the rudimentary emacs OPIUM mode file "_emacs_mode". This
+can be appended to ones ~/.emacs init file to included highlighting of the
+acceptable keyblocks.
+
+
+2.0.4 --> 2.0.5
+
+1) Bugfix for new .pwf output (eigenvalues match the configuration used for the
+output wavefunctions).
+
+2) Useful information (compile and execution host, os, date, version, 
+and command line used for psp generation) written at the end of most psp
+output file types.
+
+3) Bugfix in do_ke.c and kcomp.F (dimensioning error)
+
+4) Bugfix for 'all' command -- no longer attempts 'fc' step.
+
+2.0.5 --> 2.0.6
+
+Bugfix: 2.0.5 left the core-correction out of .pwf format.  This is now
+fixed.
+
+2.0.6 --> 3.0
+
+1) Change in versioning scheme (3 numbers is too many).
+
+2) Removal of relativisitc grid, now srl potentials use the 
+same grid as the nrl grid.  This means that the following routines
+have been removed:
+
+atm.F
+difrel.F
+etotal.F
+dsolv2.F
+velect.F
+
+Now excorr.F handles both srl and nrl exc functionals, the srl and nrl
+solves are now done in a routine called dftsolve.F (used to be
+scpot.F).  hrtree.F takes care of the srl and nrl hartree term.  
+pbe.F is now only the XC routines that are needed from the original
+K. Burke PBE.f code.  The routine interp.F is named average.F since
+it no longer interpolates anything.
+
+3) Ability to perform unbound states in a srl potential has been added
+
+4) A modified version of the Hartree-Fock code by C. Froese-Fischer and
+G. Gaigalas has been incorporated into OPIUM to construct HF psps.
+
+5) A modified version of the Dirac-Fock code by A.L. Ankudinov,
+S.I. Zabinsky, J.J. Rehr has been incorporated into OPIUM to construct
+srl HF psps.
+
+6) Two new routines, hfindesc.F and hfsmooth.F have been added to
+pseudo/ 
+
+hfindesc.F - takes care of descreening the HF effective potential for
+both the nrl and srl types of psps.  It also does the averaging of the
+dirac-fock psps to construct the srl hartree-fock psp.
+
+hfsmooth.F - takes care of smoothing the HF ionic potential.  This
+routine is activated by the [HFsmooth] keyblock.
+
+7) Each psp and ps-wavefunction is written to its own file (labeled by
+.l=<nnn>).  This allows for one to (for now by hand) use a different
+reference state for each psp.
+
+8) Most plots have been changed to show more construction info
+in the title and subtitle.
+
+9) Submissions from K. Refson have been incorporated (adds a partial
+core correction to the .recpot format).
+
+10) W. A. Al-saidi added the .champ format for the QMC CHAMP code.
+
+11) .casino format added for the QMC CASINO code (not thoroughly tested)
+
+12) Internal changes to redundant fortran common blocks.  Now much
+fortran info is in the aorb, adat, and aval common blocks.
+
+13) Default grid now extends to 120 au. 
+
+14) Ability to do semi-local tests in DFT resurrected.  For now, 
+HF tests can only be done via "sl", trying "nl" throws an warning
+and reverts to sl.  The "tc" command performs "nl" tests for DFT
+psps and "sl" tests for HF psps.
+
+15) The Wu-Cohen GGA and Perdew-Wang 91 GGA functionals were added to
+excorr.
+
+16) GGA XC functionals are changed to LDA smoothly starting at 0.001
+bohr and ending at 0.0 bohr.  This is due to heavier atoms resulting
+in "spikes" occuring near r=0.0 (this comes from the GGA enchancement
+terms behaving badly where the density gets very small).  This is only
+done automatically for Z>36, for Z<=36 no smoothing is done.
+The smoothing can be turned off like so:
+
+[XC]
+pbegga
+0.0
+
+17) The behavior of unbound states has changed.  Now a occupation
+number < 0 signals that the state should be treated as unbound.  If
+the state is NOT marked as unbound and the solver can't find a bound
+state, the run fails (it used to mark such a state as unbound and keep
+going).  If the state is constructed as unbound and a test case DOES
+NOT indicate and unbound state, it will use the psp to try and find a
+bound state.
+
+18) Insted of having each part of the code figure out the correct
+states for a semicore calculation, the parameter.c routine now
+REORDERS the param file on the fly to put all states in
+s,p,d,f,s,p,d,f etc.  order, i.e. the first instance of each 'l' is
+put in increasing 'l' order, then the next instance of each 'l' is put
+in increasing 'l' order, etc. until there are no more valence states.
+The Atom, Configs, Pseudo, and Optinfo keyblocks are all reordered the
+same way. 
+
+
+3.0 -> 3.1
+
+
+Bugfix release:
+
+1) .ncpp output no longer lists "-1" electrons when a state
+is unbound.
+
+2) ghost reporting in .rpt fixed (used to always say "no ghosts")
+
+
+3.1 -> 3.2
+
+1) Cleanup of src/atom/average.f 
+
+2) Scalar relativistic averaging now defaults to being done correctly
+for GGA XC potentials.  Previous versions of OPIUM would average the
+rel-wavefunctions from infinity -> rc for each channel.  This is ok
+and still the default for LDA, however, for GGA ALL wavefunctions must
+be averaged down to the same radius.  This is the minimum radius by
+default.
+
+3) Due to the change in the srl averaging mentioned in the previous
+change, a new keyblock "[Average]", has been add to allow users to try
+the old behavior on GGA potentials.
+
+The new keyblock gets only one character argument:
+
+[Average]
+b
+
+or
+
+[Average]
+m
+
+'b' - refers to the LDA behavior  "by rc"
+'m' - refers to the GGA behavior  "min rc"
+
+
+4) A new string variable has been added to the [Relativity] keyblock.
+This string refers to whether the relativistic corrections to the XC
+functional are used or not.  If the value is "rxc" then the
+corrections are used, if it is "nxc" then they are not used.  If the
+calculation is not relativistic, this is ignored.
+
+5) The eigenvalue guesses supplied in the param file are ignored for
+atomic SRL calculations.  This was always done prior to version 3.0,
+the srl solve is not robust enough to take a poor user guess and still
+converge in all cases.
+
+6) A small bug in the smoothing of the GGA XC functional has been corrected.  Now the 
+correct transition to LDA XC is done as you approach the origin from the smoothing
+radius.  
+
+7) A newer GGA XC smoothing method is introduced which simply fits the XC potential to 
+a quadratic near some user defined radius and then continues the analytic form back to the
+origin.  To access this smoothing method, simply make the GGA smoothing radius negative.
+
+8) A semilocal solve and test can be done instead of the non-local solve from the command line.
+See "opium -c" for more info.
+
+9) The bug which caused a command line like:
+
+opium mn log ae nl fhi
+
+to core dump (the 'ps' step is missing ; this is necessary for psps
+using potentials from different reference states) has been fixed.
+
+10) An update of the "champ" output has been done.  The header was changed, and
+instead of interpolating onto the unshifted grid from the shifted grid, the 
+shifted grid output is just written out.
+
+11) Changed .ncpp output to no longer print element name after XC
+functional due to conflict between "HF" - hartree-fock and "Hf" -
+Hafnium.
+
+12) The ability to use augmentation functions has been added to "ncpp" output
+
+13) An error is now thrown if the SIESTA output is tried for a psp with 
+augmentation functions.  Also, a warning is written about the fact that the
+SIESTA code redefines the form of the local potential within the target 
+calculation.
+
+
+3.2 -> 3.3
+
+Bugfix release:
+
+1) In version 3.2, the relativistic XC corrections were NOT applied to
+the test pseudo (NL or SL) configurations.  This bug does not effect
+the reference configuration or the output pseudo files (.fhi, .pwf
+etc.)  This bug was also pretty small, most changes are less than 1
+mRy in the transferability error.
+
+2) Added a new variable to the [HFsmooth] keyblock to allow for
+less strict tolerances on the conservation of the eigenvalues
+when smoothing the HF potentials.
+
+3.3 -> 3.4
+
+Bugfix release:
+
+Patch to enable partial core corrections for the .recpot (castep) format
+
+3.4 -> 3.5
+
+1) Fixed casino output - Significant help from William Parker
+
+2) PBEsol xc functional added by William Parker
+
+3) precision on xmgrace files increased
+
+4) modified logplt to plot semi-core correctly
+
+5) cpmd output fixed for DNL
+
+6) worked more on gfortran compatibility
+
+3.5 -> 3.6 
+
+1) Added fully-relativisitc psps -- needed significant modifications which resulted in many routines needed changing 
+
+2) Restored most if not all of the support for separate command line action (>>opium al log ae ; >>opium al log ps ; etc..) which had been lost in previous releases. 
+
+3) Implemented QuantumESPRESSO's upf version 1 psp output. Version 2 is in progress. 
+
+4) Added DNL modifications from Ben Truscott 
+
+5) Added Flexib corrections submitted by Keith Refson 
+
+
+3.6 -> 3.7 
+
+1) Added "teter" output which is format usable for frl/spin-orbit in ABINIT 
+
+2) Added "upf" (version 1) output which can be used for Quantum-Espresso (including frl/spin-orbit calculations) 
+
+3) Added "qso" output which is suitable for "QBOX" calculations 
+
+4) Added "QSOMesh" keyblock to define a linear mesh upon which the psp can be defined 
+
+5) Cleaned up a number of warning and error message output 
+
+6) Changed the printing in pwf and recpot output so gfortran will now work. 
+
+7) NOTE to MAC users: This will be the first Mac release that was prepared on "Lion". The Mac executable should be fine on older Intel systems, however, PPC Mac can no longer use the static Mac binary.
+
+
+3.7 -> 3.8 
+
+1) Restored the PCC version number for the recpot output.
+
+2) Added PCC for the QE upf output.
+
+3) Cleaned up a lot of the printing errors for the gfortran version.
+
+	
+	

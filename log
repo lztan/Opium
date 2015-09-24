@@ -1,0 +1,237 @@
+cd src && make  
+make[1]: Entering directory `/home/lztan/science/psp/code/opium_orig/opium-v3.8-src/src'
+for i in main atom pseudo output plot FlexiLib uniPPlib lapack; do cd $i && make || exit 1; cd ..; done
+make[2]: Entering directory `/home/lztan/science/psp/code/opium_orig/opium-v3.8-src/src/main'
+gcc -I../include -I../FlexiLib -I../uniPPlib -g -O2 -DCSYS=\"'Linux 3.10.3-1-ARCH unknown'\" -DCHOST=\"hoponpop\" -DCDATE=\"'Fri Aug 28 16:56:38 EDT 2015'\"    -c -o opium.o opium.c
+gcc -I../include -I../FlexiLib -I../uniPPlib -g -O2 -DCSYS=\"'Linux 3.10.3-1-ARCH unknown'\" -DCHOST=\"hoponpop\" -DCDATE=\"'Fri Aug 28 16:56:38 EDT 2015'\"    -c -o nlm.o nlm.c
+gcc -I../include -I../FlexiLib -I../uniPPlib -g -O2 -DCSYS=\"'Linux 3.10.3-1-ARCH unknown'\" -DCHOST=\"hoponpop\" -DCDATE=\"'Fri Aug 28 16:56:38 EDT 2015'\"    -c -o parameter.o parameter.c
+rm -f objects
+for i in opium.o nlm.o parameter.o; do echo main/$i >> objects; done
+make[2]: Leaving directory `/home/lztan/science/psp/code/opium_orig/opium-v3.8-src/src/main'
+make[2]: Entering directory `/home/lztan/science/psp/code/opium_orig/opium-v3.8-src/src/atom'
+gfortran -g -O2   -I../include cubint.F -c 
+gfortran -g -O2   -I../include excorr.F -c 
+gfortran -g -O2   -I../include pbe.F -c 
+gfortran -g -O2   -I../include ghostnl.F -c 
+gfortran -g -O2   -I../include schslrel.F -c 
+gfortran -g -O2   -I../include hrtree.F -c 
+gfortran -g -O2   -I../include average.F -c 
+gfortran -g -O2   -I../include logder.F -c 
+gfortran -g -O2   -I../include nllogd.F -c 
+gfortran -g -O2   -I../include getpcc.F -c 
+gfortran -g -O2   -I../include pratt.F -c 
+gfortran -g -O2   -I../include radin.F -c 
+gfortran -g -O2   -I../include schsl.F -c 
+gfortran -g -O2   -I../include dftsolve.F -c 
+gfortran -g -O2   -I../include denkcomp.F -c 
+gfortran -g -O2   -I../include interp2.F -c 
+gfortran -g -O2   -I../include corpz.F -c 
+gfortran -g -O2   -I../include corvwn.F -c 
+gfortran -g -O2   -I../include hfcoef.F -c 
+gfortran -g -O2   -I../include potl.F -c 
+gfortran -g -O2   -I../include xch.F -c 
+gfortran -g -O2   -I../include ykf.F -c 
+gfortran -g -O2   -I../include zkf.F -c 
+gfortran -g -O2   -I../include dfsolve.F -c 
+gfortran -g -O2   -I../include soldir.F -c 
+gfortran -g -O2   -I../include setuphf.F -c 
+gfortran -g -O2   -I../include intdir.F -c 
+gfortran -g -O2   -I../include norm.F -c 
+gfortran -g -O2   -I../include dentfa.F -c 
+gfortran -g -O2   -I../include cwig3j.F -c 
+gfortran -g -O2   -I../include potrdf.F -c 
+gfortran -g -O2   -I../include ortdat.F -c 
+gfortran -g -O2   -I../include cofcon.F -c 
+gfortran -g -O2   -I../include dsordf.F -c 
+gfortran -g -O2   -I../include akeato.F -c 
+gfortran -g -O2   -I../include aprdev.F -c 
+gfortran -g -O2   -I../include yzkrdf.F -c 
+gfortran -g -O2   -I../include yzkteg.F -c 
+gfortran -g -O2   -I../include lagdat.F -c 
+gfortran -g -O2   -I../include fdrirk.F -c 
+gfortran -g -O2   -I../include etotal.F -c 
+gfortran -g -O2   -I../include hfmethd.F -c 
+gfortran -g -O2   -I../include hfde.F -c 
+gfortran -g -O2   -I../include hfsolve.F -c 
+gfortran -g -O2   -I../include hfenergy.F -c 
+gfortran -g -O2   -I../include potrdf2.F -c 
+gfortran -g -O2   -I../include hfcoef_rel.F -c 
+gfortran -g -O2   -I../include hfint.F -c 
+gfortran -g -O2   -I../include hfuncs.F -c 
+gcc -I../include -I../FlexiLib -I../uniPPlib -g -O2 -DCSYS=\"'Linux 3.10.3-1-ARCH unknown'\" -DCHOST=\"hoponpop\" -DCDATE=\"'Fri Aug 28 16:56:38 EDT 2015'\"    -c -o do_ae.o do_ae.c
+gcc -I../include -I../FlexiLib -I../uniPPlib -g -O2 -DCSYS=\"'Linux 3.10.3-1-ARCH unknown'\" -DCHOST=\"hoponpop\" -DCDATE=\"'Fri Aug 28 16:56:38 EDT 2015'\"    -c -o do_nl.o do_nl.c
+gcc -I../include -I../FlexiLib -I../uniPPlib -g -O2 -DCSYS=\"'Linux 3.10.3-1-ARCH unknown'\" -DCHOST=\"hoponpop\" -DCDATE=\"'Fri Aug 28 16:56:38 EDT 2015'\"    -c -o do_tc.o do_tc.c
+gcc -I../include -I../FlexiLib -I../uniPPlib -g -O2 -DCSYS=\"'Linux 3.10.3-1-ARCH unknown'\" -DCHOST=\"hoponpop\" -DCDATE=\"'Fri Aug 28 16:56:38 EDT 2015'\"    -c -o do_fc.o do_fc.c
+gcc -I../include -I../FlexiLib -I../uniPPlib -g -O2 -DCSYS=\"'Linux 3.10.3-1-ARCH unknown'\" -DCHOST=\"hoponpop\" -DCDATE=\"'Fri Aug 28 16:56:38 EDT 2015'\"    -c -o writeae.o writeae.c
+gcc -I../include -I../FlexiLib -I../uniPPlib -g -O2 -DCSYS=\"'Linux 3.10.3-1-ARCH unknown'\" -DCHOST=\"hoponpop\" -DCDATE=\"'Fri Aug 28 16:56:38 EDT 2015'\"    -c -o startae.o startae.c
+gcc -I../include -I../FlexiLib -I../uniPPlib -g -O2 -DCSYS=\"'Linux 3.10.3-1-ARCH unknown'\" -DCHOST=\"hoponpop\" -DCDATE=\"'Fri Aug 28 16:56:38 EDT 2015'\"    -c -o relorbae.o relorbae.c
+gcc -I../include -I../FlexiLib -I../uniPPlib -g -O2 -DCSYS=\"'Linux 3.10.3-1-ARCH unknown'\" -DCHOST=\"hoponpop\" -DCDATE=\"'Fri Aug 28 16:56:38 EDT 2015'\"    -c -o nrelorbae.o nrelorbae.c
+gcc -I../include -I../FlexiLib -I../uniPPlib -g -O2 -DCSYS=\"'Linux 3.10.3-1-ARCH unknown'\" -DCHOST=\"hoponpop\" -DCDATE=\"'Fri Aug 28 16:56:38 EDT 2015'\"    -c -o relorbnl.o relorbnl.c
+gcc -I../include -I../FlexiLib -I../uniPPlib -g -O2 -DCSYS=\"'Linux 3.10.3-1-ARCH unknown'\" -DCHOST=\"hoponpop\" -DCDATE=\"'Fri Aug 28 16:56:38 EDT 2015'\"    -c -o nrelorbnl.o nrelorbnl.c
+rm -f objects
+for i in cubint.o excorr.o pbe.o ghostnl.o schslrel.o hrtree.o average.o logder.o nllogd.o getpcc.o pratt.o radin.o schsl.o dftsolve.o denkcomp.o interp2.o corpz.o corvwn.o hfcoef.o potl.o xch.o ykf.o zkf.o dfsolve.o soldir.o setuphf.o intdir.o norm.o dentfa.o cwig3j.o potrdf.o ortdat.o cofcon.o dsordf.o akeato.o aprdev.o yzkrdf.o yzkteg.o lagdat.o fdrirk.o etotal.o hfmethd.o hfde.o hfsolve.o hfenergy.o potrdf2.o hfcoef_rel.o hfint.o hfuncs.o do_ae.o do_nl.o do_tc.o do_fc.o writeae.o startae.o relorbae.o nrelorbae.o relorbnl.o nrelorbnl.o; do echo atom/$i >> objects; done
+make[2]: Leaving directory `/home/lztan/science/psp/code/opium_orig/opium-v3.8-src/src/atom'
+make[2]: Entering directory `/home/lztan/science/psp/code/opium_orig/opium-v3.8-src/src/pseudo'
+gfortran -g -O2   -I../include ai.F -c
+gfortran -g -O2   -I../include besfn.F -c
+gfortran -g -O2   -I../include biq.F -c
+gfortran -g -O2   -I../include conmax.F -c
+gfortran -g -O2   -I../include cq.F -c
+gfortran -g -O2   -I../include descreen.F -c
+gfortran -g -O2   -I../include dij.F -c
+gfortran -g -O2   -I../include ei.F -c
+gfortran -g -O2   -I../include finteg.F -c
+gfortran -g -O2   -I../include fitwv.F -c
+gfortran -g -O2   -I../include gaussq.F -c
+gfortran -g -O2   -I../include ghost.F -c
+gfortran -g -O2   -I../include ginteg.F -c
+gfortran -g -O2   -I../include guess.F -c
+gfortran -g -O2   -I../include optinvert.F -c
+gfortran -g -O2   -I../include optim.F -c
+gfortran -g -O2   -I../include optsolve.F -c
+gfortran -g -O2   -I../include conmaxdriver.F -c
+gfortran -g -O2   -I../include xroots.F -c
+gfortran -g -O2   -I../include kpot.F -c
+gfortran -g -O2   -I../include kerker.F -c
+gfortran -g -O2   -I../include lambda.F -c
+gfortran -g -O2   -I../include newmin.F -c
+gfortran -g -O2   -I../include fnset2.F -c
+gfortran -g -O2   -I../include tmsub.F -c
+gfortran -g -O2   -I../include tmpot.F -c
+gfortran -g -O2   -I../include kcomp.F -c
+gfortran -g -O2   -I../include hfinvdesc.F -c
+gfortran -g -O2   -I../include hfsmooth.F -c
+gcc -I../include -I../FlexiLib -I../uniPPlib -g -O2 -DCSYS=\"'Linux 3.10.3-1-ARCH unknown'\" -DCHOST=\"hoponpop\" -DCDATE=\"'Fri Aug 28 16:56:38 EDT 2015'\"    -c -o do_ps.o do_ps.c
+gcc -I../include -I../FlexiLib -I../uniPPlib -g -O2 -DCSYS=\"'Linux 3.10.3-1-ARCH unknown'\" -DCHOST=\"hoponpop\" -DCDATE=\"'Fri Aug 28 16:56:38 EDT 2015'\"    -c -o do_ke.o do_ke.c
+rm -f objects
+for i in ai.o besfn.o biq.o conmax.o cq.o descreen.o dij.o ei.o finteg.o fitwv.o gaussq.o ghost.o ginteg.o guess.o optinvert.o optim.o optsolve.o conmaxdriver.o xroots.o kpot.o kerker.o lambda.o newmin.o fnset2.o tmsub.o tmpot.o kcomp.o hfinvdesc.o hfsmooth.o do_ps.o do_ke.o; do echo pseudo/$i >> objects; done
+make[2]: Leaving directory `/home/lztan/science/psp/code/opium_orig/opium-v3.8-src/src/pseudo'
+make[2]: Entering directory `/home/lztan/science/psp/code/opium_orig/opium-v3.8-src/src/output'
+gfortran -g -O2   -I../include klby.F -c 
+gfortran -g -O2   -I../include radina.F -c 
+gfortran -g -O2   -I../include writepwf.F -c 
+gfortran -g -O2   -I../include writerecpot.F -c 
+gcc -I../include -I../FlexiLib -I../uniPPlib -g -O2 -DCSYS=\"'Linux 3.10.3-1-ARCH unknown'\" -DCHOST=\"hoponpop\" -DCDATE=\"'Fri Aug 28 16:56:38 EDT 2015'\"    -c -o cwritepwf.o cwritepwf.c
+gcc -I../include -I../FlexiLib -I../uniPPlib -g -O2 -DCSYS=\"'Linux 3.10.3-1-ARCH unknown'\" -DCHOST=\"hoponpop\" -DCDATE=\"'Fri Aug 28 16:56:38 EDT 2015'\"    -c -o do_fhi.o do_fhi.c
+gcc -I../include -I../FlexiLib -I../uniPPlib -g -O2 -DCSYS=\"'Linux 3.10.3-1-ARCH unknown'\" -DCHOST=\"hoponpop\" -DCDATE=\"'Fri Aug 28 16:56:38 EDT 2015'\"    -c -o do_ncpp.o do_ncpp.c
+gcc -I../include -I../FlexiLib -I../uniPPlib -g -O2 -DCSYS=\"'Linux 3.10.3-1-ARCH unknown'\" -DCHOST=\"hoponpop\" -DCDATE=\"'Fri Aug 28 16:56:38 EDT 2015'\"    -c -o do_pwf.o do_pwf.c
+gcc -I../include -I../FlexiLib -I../uniPPlib -g -O2 -DCSYS=\"'Linux 3.10.3-1-ARCH unknown'\" -DCHOST=\"hoponpop\" -DCDATE=\"'Fri Aug 28 16:56:38 EDT 2015'\"    -c -o do_qeupf.o do_qeupf.c
+gcc -I../include -I../FlexiLib -I../uniPPlib -g -O2 -DCSYS=\"'Linux 3.10.3-1-ARCH unknown'\" -DCHOST=\"hoponpop\" -DCDATE=\"'Fri Aug 28 16:56:38 EDT 2015'\"    -c -o do_spinor.o do_spinor.c
+gcc -I../include -I../FlexiLib -I../uniPPlib -g -O2 -DCSYS=\"'Linux 3.10.3-1-ARCH unknown'\" -DCHOST=\"hoponpop\" -DCDATE=\"'Fri Aug 28 16:56:38 EDT 2015'\"    -c -o nwrite.o nwrite.c
+gcc -I../include -I../FlexiLib -I../uniPPlib -g -O2 -DCSYS=\"'Linux 3.10.3-1-ARCH unknown'\" -DCHOST=\"hoponpop\" -DCDATE=\"'Fri Aug 28 16:56:38 EDT 2015'\"    -c -o do_recpot.o do_recpot.c
+gcc -I../include -I../FlexiLib -I../uniPPlib -g -O2 -DCSYS=\"'Linux 3.10.3-1-ARCH unknown'\" -DCHOST=\"hoponpop\" -DCDATE=\"'Fri Aug 28 16:56:38 EDT 2015'\"    -c -o do_siesta.o do_siesta.c
+gcc -I../include -I../FlexiLib -I../uniPPlib -g -O2 -DCSYS=\"'Linux 3.10.3-1-ARCH unknown'\" -DCHOST=\"hoponpop\" -DCDATE=\"'Fri Aug 28 16:56:38 EDT 2015'\"    -c -o do_cpmd.o do_cpmd.c
+gcc -I../include -I../FlexiLib -I../uniPPlib -g -O2 -DCSYS=\"'Linux 3.10.3-1-ARCH unknown'\" -DCHOST=\"hoponpop\" -DCDATE=\"'Fri Aug 28 16:56:38 EDT 2015'\"    -c -o do_casino.o do_casino.c
+gcc -I../include -I../FlexiLib -I../uniPPlib -g -O2 -DCSYS=\"'Linux 3.10.3-1-ARCH unknown'\" -DCHOST=\"hoponpop\" -DCDATE=\"'Fri Aug 28 16:56:38 EDT 2015'\"    -c -o do_champ.o do_champ.c
+gcc -I../include -I../FlexiLib -I../uniPPlib -g -O2 -DCSYS=\"'Linux 3.10.3-1-ARCH unknown'\" -DCHOST=\"hoponpop\" -DCDATE=\"'Fri Aug 28 16:56:38 EDT 2015'\"    -c -o do_teter.o do_teter.c
+gcc -I../include -I../FlexiLib -I../uniPPlib -g -O2 -DCSYS=\"'Linux 3.10.3-1-ARCH unknown'\" -DCHOST=\"hoponpop\" -DCDATE=\"'Fri Aug 28 16:56:38 EDT 2015'\"    -c -o do_qso.o do_qso.c
+rm -f objects
+for i in klby.o radina.o writepwf.o writerecpot.o cwritepwf.o do_fhi.o do_ncpp.o do_pwf.o do_qeupf.o do_spinor.o nwrite.o do_recpot.o do_siesta.o do_cpmd.o do_casino.o do_champ.o do_teter.o do_qso.o; do echo output/$i >> objects; done
+make[2]: Leaving directory `/home/lztan/science/psp/code/opium_orig/opium-v3.8-src/src/output'
+make[2]: Entering directory `/home/lztan/science/psp/code/opium_orig/opium-v3.8-src/src/plot'
+gfortran -g -O2   -I../include btrans.F -c
+gcc -I../include -I../FlexiLib -I../uniPPlib -g -O2 -DCSYS=\"'Linux 3.10.3-1-ARCH unknown'\" -DCHOST=\"hoponpop\" -DCDATE=\"'Fri Aug 28 16:56:38 EDT 2015'\"    -c -o do_plot.o do_plot.c
+gcc -I../include -I../FlexiLib -I../uniPPlib -g -O2 -DCSYS=\"'Linux 3.10.3-1-ARCH unknown'\" -DCHOST=\"hoponpop\" -DCDATE=\"'Fri Aug 28 16:56:38 EDT 2015'\"    -c -o do_pccplot.o do_pccplot.c
+gcc -I../include -I../FlexiLib -I../uniPPlib -g -O2 -DCSYS=\"'Linux 3.10.3-1-ARCH unknown'\" -DCHOST=\"hoponpop\" -DCDATE=\"'Fri Aug 28 16:56:38 EDT 2015'\"    -c -o do_logplot.o do_logplot.c
+gcc -I../include -I../FlexiLib -I../uniPPlib -g -O2 -DCSYS=\"'Linux 3.10.3-1-ARCH unknown'\" -DCHOST=\"hoponpop\" -DCDATE=\"'Fri Aug 28 16:56:38 EDT 2015'\"    -c -o do_wplot.o do_wplot.c
+gcc -I../include -I../FlexiLib -I../uniPPlib -g -O2 -DCSYS=\"'Linux 3.10.3-1-ARCH unknown'\" -DCHOST=\"hoponpop\" -DCDATE=\"'Fri Aug 28 16:56:38 EDT 2015'\"    -c -o do_vplot.o do_vplot.c
+gcc -I../include -I../FlexiLib -I../uniPPlib -g -O2 -DCSYS=\"'Linux 3.10.3-1-ARCH unknown'\" -DCHOST=\"hoponpop\" -DCDATE=\"'Fri Aug 28 16:56:38 EDT 2015'\"    -c -o do_qplot.o do_qplot.c
+gcc -I../include -I../FlexiLib -I../uniPPlib -g -O2 -DCSYS=\"'Linux 3.10.3-1-ARCH unknown'\" -DCHOST=\"hoponpop\" -DCDATE=\"'Fri Aug 28 16:56:38 EDT 2015'\"    -c -o do_keplot.o do_keplot.c
+rm -f objects
+for i in btrans.o do_plot.o do_pccplot.o do_logplot.o do_wplot.o do_vplot.o do_qplot.o do_keplot.o; do echo plot/$i >> objects; done
+make[2]: Leaving directory `/home/lztan/science/psp/code/opium_orig/opium-v3.8-src/src/plot'
+make[2]: Entering directory `/home/lztan/science/psp/code/opium_orig/opium-v3.8-src/src/FlexiLib'
+gcc -I../include -I../FlexiLib -I../uniPPlib -g -O2 -DCSYS=\"'Linux 3.10.3-1-ARCH unknown'\" -DCHOST=\"hoponpop\" -DCDATE=\"'Fri Aug 28 16:56:38 EDT 2015'\"    -c -o flexi.o flexi.c
+rm -f objects
+for i in flexi.o; do echo FlexiLib/$i >> objects; done
+make[2]: Leaving directory `/home/lztan/science/psp/code/opium_orig/opium-v3.8-src/src/FlexiLib'
+make[2]: Entering directory `/home/lztan/science/psp/code/opium_orig/opium-v3.8-src/src/uniPPlib'
+gcc -I../include -I../FlexiLib -I../uniPPlib -g -O2 -DCSYS=\"'Linux 3.10.3-1-ARCH unknown'\" -DCHOST=\"hoponpop\" -DCDATE=\"'Fri Aug 28 16:56:38 EDT 2015'\"    -c -o uniPP_read.o uniPP_read.c
+gcc -I../include -I../FlexiLib -I../uniPPlib -g -O2 -DCSYS=\"'Linux 3.10.3-1-ARCH unknown'\" -DCHOST=\"hoponpop\" -DCDATE=\"'Fri Aug 28 16:56:38 EDT 2015'\"    -c -o uniPP_write.o uniPP_write.c
+gcc -I../include -I../FlexiLib -I../uniPPlib -g -O2 -DCSYS=\"'Linux 3.10.3-1-ARCH unknown'\" -DCHOST=\"hoponpop\" -DCDATE=\"'Fri Aug 28 16:56:38 EDT 2015'\"    -c -o uniPP_writefhi.o uniPP_writefhi.c
+gcc -I../include -I../FlexiLib -I../uniPPlib -g -O2 -DCSYS=\"'Linux 3.10.3-1-ARCH unknown'\" -DCHOST=\"hoponpop\" -DCDATE=\"'Fri Aug 28 16:56:38 EDT 2015'\"    -c -o uniPP_free.o uniPP_free.c
+gcc -I../include -I../FlexiLib -I../uniPPlib -g -O2 -DCSYS=\"'Linux 3.10.3-1-ARCH unknown'\" -DCHOST=\"hoponpop\" -DCDATE=\"'Fri Aug 28 16:56:38 EDT 2015'\"    -c -o uniPP_alpha.o uniPP_alpha.c
+gcc -I../include -I../FlexiLib -I../uniPPlib -g -O2 -DCSYS=\"'Linux 3.10.3-1-ARCH unknown'\" -DCHOST=\"hoponpop\" -DCDATE=\"'Fri Aug 28 16:56:38 EDT 2015'\"    -c -o uniPP_ffloc.o uniPP_ffloc.c
+gcc -I../include -I../FlexiLib -I../uniPPlib -g -O2 -DCSYS=\"'Linux 3.10.3-1-ARCH unknown'\" -DCHOST=\"hoponpop\" -DCDATE=\"'Fri Aug 28 16:56:38 EDT 2015'\"    -c -o uniPP_ffnlcc.o uniPP_ffnlcc.c
+gcc -I../include -I../FlexiLib -I../uniPPlib -g -O2 -DCSYS=\"'Linux 3.10.3-1-ARCH unknown'\" -DCHOST=\"hoponpop\" -DCDATE=\"'Fri Aug 28 16:56:38 EDT 2015'\"    -c -o uniPP_kbden.o uniPP_kbden.c
+gcc -I../include -I../FlexiLib -I../uniPPlib -g -O2 -DCSYS=\"'Linux 3.10.3-1-ARCH unknown'\" -DCHOST=\"hoponpop\" -DCDATE=\"'Fri Aug 28 16:56:38 EDT 2015'\"    -c -o uniPP_kbfnl.o uniPP_kbfnl.c
+rm -f objects
+for i in uniPP_read.o uniPP_write.o uniPP_writefhi.o uniPP_free.o uniPP_alpha.o uniPP_ffloc.o uniPP_ffnlcc.o uniPP_kbden.o uniPP_kbfnl.o; do echo uniPPlib/$i >> objects; done
+make[2]: Leaving directory `/home/lztan/science/psp/code/opium_orig/opium-v3.8-src/src/uniPPlib'
+make[2]: Entering directory `/home/lztan/science/psp/code/opium_orig/opium-v3.8-src/src/lapack'
+gfortran -g -O2  -c -o dbdsqr.o dbdsqr.f
+gfortran -g -O2  -c -o dcopy.o dcopy.f
+gfortran -g -O2  -c -o ddot.o ddot.f
+gfortran -g -O2  -c -o dgebd2.o dgebd2.f
+gfortran -g -O2  -c -o dgebrd.o dgebrd.f
+gfortran -g -O2  -c -o dgelq2.o dgelq2.f
+gfortran -g -O2  -c -o dgelqf.o dgelqf.f
+gfortran -g -O2  -c -o dgemm.o dgemm.f
+gfortran -g -O2  -c -o dgemv.o dgemv.f
+gfortran -g -O2  -c -o dgeqr2.o dgeqr2.f
+gfortran -g -O2  -c -o dgeqrf.o dgeqrf.f
+gfortran -g -O2  -c -o dger.o dger.f
+gfortran -g -O2  -c -o dgesvd.o dgesvd.f
+gfortran -g -O2  -c -o dlabrd.o dlabrd.f
+gfortran -g -O2  -c -o dlacpy.o dlacpy.f
+gfortran -c -O0 dlamch.f
+gfortran -g -O2  -c -o dlange.o dlange.f
+gfortran -g -O2  -c -o dlapy2.o dlapy2.f
+gfortran -g -O2  -c -o dlarf.o dlarf.f
+gfortran -g -O2  -c -o dlarfb.o dlarfb.f
+gfortran -g -O2  -c -o dlarfg.o dlarfg.f
+gfortran -g -O2  -c -o dlarft.o dlarft.f
+gfortran -g -O2  -c -o dlartg.o dlartg.f
+gfortran -g -O2  -c -o dlas2.o dlas2.f
+gfortran -g -O2  -c -o dlascl.o dlascl.f
+gfortran -g -O2  -c -o dlaset.o dlaset.f
+gfortran -g -O2  -c -o dlasq1.o dlasq1.f
+gfortran -g -O2  -c -o dlasq2.o dlasq2.f
+gfortran -g -O2  -c -o dlasq3.o dlasq3.f
+gfortran -g -O2  -c -o dlasq4.o dlasq4.f
+gfortran -g -O2  -c -o dlasq5.o dlasq5.f
+gfortran -g -O2  -c -o dlasq6.o dlasq6.f
+gfortran -g -O2  -c -o dlasr.o dlasr.f
+gfortran -g -O2  -c -o dlasrt.o dlasrt.f
+gfortran -g -O2  -c -o dlassq.o dlassq.f
+gfortran -g -O2  -c -o dlasv2.o dlasv2.f
+gfortran -g -O2  -c -o dlauu2.o dlauu2.f
+gfortran -g -O2  -c -o dlauum.o dlauum.f
+gfortran -g -O2  -c -o dnrm2.o dnrm2.f
+gfortran -g -O2  -c -o dorg2r.o dorg2r.f
+gfortran -g -O2  -c -o dorgbr.o dorgbr.f
+gfortran -g -O2  -c -o dorgl2.o dorgl2.f
+gfortran -g -O2  -c -o dorglq.o dorglq.f
+gfortran -g -O2  -c -o dorgqr.o dorgqr.f
+gfortran -g -O2  -c -o dorm2r.o dorm2r.f
+gfortran -g -O2  -c -o dormbr.o dormbr.f
+gfortran -g -O2  -c -o dorml2.o dorml2.f
+gfortran -g -O2  -c -o dormlq.o dormlq.f
+gfortran -g -O2  -c -o dormqr.o dormqr.f
+gfortran -g -O2  -c -o dpotf2.o dpotf2.f
+gfortran -g -O2  -c -o dpotrf.o dpotrf.f
+gfortran -g -O2  -c -o dpotri.o dpotri.f
+gfortran -g -O2  -c -o drot.o drot.f
+gfortran -g -O2  -c -o dscal.o dscal.f
+gfortran -g -O2  -c -o dswap.o dswap.f
+gfortran -g -O2  -c -o dsyrk.o dsyrk.f
+gfortran -g -O2  -c -o dtrmm.o dtrmm.f
+gfortran -g -O2  -c -o dtrmv.o dtrmv.f
+gfortran -g -O2  -c -o dtrsm.o dtrsm.f
+gfortran -g -O2  -c -o dtrti2.o dtrti2.f
+gfortran -g -O2  -c -o dtrtri.o dtrtri.f
+gfortran -g -O2  -c -o ieeeck.o ieeeck.f
+gfortran -g -O2  -c -o ilaenv.o ilaenv.f
+gfortran -g -O2  -c -o xerbla.o xerbla.f
+gfortran -g -O2  -c -o lsame.o lsame.f
+gfortran -g -O2  -c -o dgesv.o dgesv.f
+gfortran -g -O2  -c -o dgetf2.o dgetf2.f
+gfortran -g -O2  -c -o dgetrf.o dgetrf.f
+gfortran -g -O2  -c -o dgetrs.o dgetrs.f
+gfortran -g -O2  -c -o dlaswp.o dlaswp.f
+gfortran -g -O2  -c -o idamax.o idamax.f
+rm -f objects
+for i in dbdsqr.o dcopy.o ddot.o dgebd2.o dgebrd.o dgelq2.o dgelqf.o dgemm.o dgemv.o dgeqr2.o dgeqrf.o dger.o dgesvd.o dlabrd.o dlacpy.o dlamch.o dlange.o dlapy2.o dlarf.o dlarfb.o dlarfg.o dlarft.o dlartg.o dlas2.o dlascl.o dlaset.o dlasq1.o dlasq2.o dlasq3.o dlasq4.o dlasq5.o dlasq6.o dlasr.o dlasrt.o dlassq.o dlasv2.o dlauu2.o dlauum.o dnrm2.o dorg2r.o dorgbr.o dorgl2.o dorglq.o dorgqr.o dorm2r.o dormbr.o dorml2.o dormlq.o dormqr.o dpotf2.o dpotrf.o dpotri.o drot.o dscal.o dswap.o dsyrk.o dtrmm.o dtrmv.o dtrsm.o dtrti2.o dtrtri.o ieeeck.o ilaenv.o xerbla.o lsame.o dgesv.o dgetf2.o dgetrf.o dgetrs.o dlaswp.o idamax.o; do echo lapack/$i >> objects; done
+make[2]: Leaving directory `/home/lztan/science/psp/code/opium_orig/opium-v3.8-src/src/lapack'
+gfortran -o ../opium `for i in main atom pseudo output plot FlexiLib uniPPlib lapack; do cat $i/objects; done` -lm -fdefault-real-8 -fno-automatic  -lm  -L/usr/lib/gcc/x86_64-unknown-linux-gnu/4.8.1 -L/usr/lib/gcc/x86_64-unknown-linux-gnu/4.8.1/../../../../lib -L/lib/../lib -L/usr/lib/../lib -L/usr/lib/gcc/x86_64-unknown-linux-gnu/4.8.1/../../.. -lgfortran -lm -lgcc_s -lquadmath
+make[1]: Leaving directory `/home/lztan/science/psp/code/opium_orig/opium-v3.8-src/src'

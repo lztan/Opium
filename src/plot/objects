@@ -1,0 +1,8 @@
+plot/btrans.o
+plot/do_plot.o
+plot/do_pccplot.o
+plot/do_logplot.o
+plot/do_wplot.o
+plot/do_vplot.o
+plot/do_qplot.o
+plot/do_keplot.o

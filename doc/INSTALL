@@ -1,0 +1,40 @@
+Installation & Usage:
+---------------------
+
+Please visit the the OPIUM project web site at
+http://opium.sourceforge.net for information on installation and
+usage.
+
+To compile OPIUM:
+
+./configure
+make
+
+should work fine. 
+
+If this fails, simply copy "makevars.in" to "makevars" and replace the
+strings that begin and end with "@".  Here is an example makevars:
+
+----------
+CC=gcc
+CFLAGS=-I../include -I../FlexiLib -I../uniPPlib -g -O2
+CPP=gcc -E
+FC=pgf77
+FFLAGS= -fast -r8
+FPP=/usr/bin/cpp
+FPPFLAGS=-traditional
+LD=gcc
+LDFLAGS=-L/usr/pgi/linux86/5.0/lib  -lm -lpgftnrtl -lpgc
+RANLIB=ranlib
+AR=/usr/bin/ar
+NOOPT=-O0 -r8
+----------
+
+ If there are further problems, please see the files in docs/ or look at the
+FAQ on the OPIUM homepage.  If all else fails, please feel free to
+email the mailing list:
+
+opium-talk@lists.sourceforge.net
+
+to ask your question.
+

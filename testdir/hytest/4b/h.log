@@ -1,0 +1,64 @@
+
+ ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+           OPIUM  Version:        3.8                             
+           =====================================            
+ See http://opium.sourceforge.net for help and information                 
+ Copyright 2009 : The OPIUM project                         
+
+ Compile host     : hoponpop
+ Compile OS       : Linux 3.10.3-1-ARCH unknown
+ Compile date     : Thu Jul  2 16:14:15 EDT 2015
+
+ Execution host   : hoponpop
+ time of execution: Tue Jul  7 18:53:16 2015
+
+ ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ Reading parameter file:  <h.param> ... 
+ File prefix             : h 
+ Element                 : Hydrogen   (H) 
+ Z                       : 1 
+ 
+ Number of all-electron orbitals   : 1 
+ Number of pseudo       orbitals   : 1 
+ 
+ Pseudopotential is non-relativistic 
+ Using Hartree-Fock Exchange (Beta!!)                
+ HF pseudopotential NOT being smoothed! 
+ The s potential is used for the KB construction 
+ Optimized (RRKJ) pseudopotential method will be used 
+
+ nl    cutoff radii    q-max      # bessel functions
+ 1s       1.800        7.070              4 
+
+ Reference Configuration: core  <-/-> valence 
+ <-/-> 1s1 
+
+ Grid definitions: 
+ a_grid=1.00e-04    b_grid=1.30e-02    # points=1076 
+ r(1)=1.00e-04      r(np)=1.17e+02    
+
+ dEmax tolerance:  1.00e-08      dVmax tolerance:  1.00e-06     
+
+ Starting calculation...
+
+ ======================================================================== 
+ Begin AE calculation
+ ======================================================================== 
+ Performing non-relativistic AE calculation...  
+
+ iter       Etot             Eeig             Ehart    de_max   dv_max
+   1       -1.0000000       1.0000000       0.0000000 0.34E-09 0.34E-06
+
+ Hartree-Fock converged!
+
+ Converged in 1 iteration (probably reference state)
+ Energy:      -1.00000000    Ebs:      -1.00000000
+ Eh:           0.00000000    Ex :       0.00000000
+
+   Orbital    Filling       Eigenvalues    Norm(rc->oo)      Peak
+    |100>      1.000          -1.000000      0.308580      0.993680
+
+ ======================================================================== 
+ End AE calculation
+ ======================================================================== 
+------------- closing opium session ------------

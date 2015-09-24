@@ -1,0 +1,175 @@
+/*
+ * Copyright (c) 1998-2012 The OPIUM Group
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ *
+ */
+/*                                                                          */
+/*generate *.recpot output for CASTEP                                       */
+/****************************************************************************/
+/*INPUT:  param_t structure, *.ps, *.loc                                    */
+/*OUTPUT: *.pwf                                                             */
+/****************************************************************************/
+
+/* standard libraries */
+#include <stdio.h>
+#include <stdlib.h>
+
+#include "parameter.h"        /* defines structure: 'param_t' */
+#include "cdim.h"        /* fortran code parameters */
+#include "do_recpot.h"           /* the module's own header */
+#include "common_blocks.h"    /* fortran common blocks */
+
+/* from atom/do_nl.c */
+void nrelorbnl(param_t *param, int, char *);
+/* creative passing of the 1st argument to follow */
+void nrelsproj(param_t *param, char *);
+void writerecpot_(void *,void *,  char *);
+void readPS(param_t *param);
+int do_recpot(param_t *param, FILE *fp_param, char *logfile){
+
+  int i,j;              /* loop counter */
+  char filename[180]; /* filename */
+  int c,config;              /* dummy character */
+  FILE *fp;           /* file pointer */
+  FILE *fp_log; 
+
+  fp_log = fopen(logfile, "a");
+  fprintf(fp_log,"<<<do_recpot>>>\n");
+  fclose(fp_log);
+
+  /* set the log file */
+  sprintf(filenames_.file_log, "%s", logfile);
+  
+  /* set the pwf common block */
+  /*  sprintf(filenames_.file_ps, "%s.ps", param->name);*/
+  pwf_.zeff = param->z;
+  for (i=0; i<param->norb-param->nval; i++)
+    pwf_.zeff -= param->wnl[i];
+  pwf_.rpcc = param->rpcc;  
+  pwf_.igrid = param->ngrid;
+  pwf_.spacing = param->b;
+  pwf_.first = param->a;
+  pwf_.nval = param->nll;
+  if (param->nboxes > 0)
+    pwf_.inl = 1;
+  else
+    pwf_.inl = 0;
+
+  if (param->nval == 1)
+    param->ist1 = 3;
+  else
+    param->ist1 = 2;
+
+  pwf_.ist1 = param->ist1;
+  pwf_.ilocal = param->local;
+  pwf_.ilocalind = param->localind;
+
+  param->ncut = param->ngrid;
+  pwf_.ncut = grid_.np;
+
+  readPS(param);
+  nrelsproj(param,logfile);
+  /* new routine to set the arrays for semicore states */
+
+  aorb_.nval=param->nval;
+  aorb_.ncore=param->norb-param->nval;
+  psdat_.nll=param->nll;
+
+  config=-1;
+  nrelorbnl(param,config,logfile);
+  
+  sprintf(filename, "%s.loc", param->name);
+  if (fp = fopen(filename, "rb")) {
+    fread(nlcore_.rvloc, sizeof(double), param->ngrid, fp);
+    fclose(fp);
+    } else {
+    fp_log = fopen(logfile, "a");
+    fprintf(fp_log,"Looks like you never ran nl yet you have augmentation functions :( --EXIT!\n");
+    printf("Looks like you never ran nl yet you have augmentation functions :( --EXIT!\n");
+    fclose(fp_log);
+  }
+
+
+  /*  for (i=0; i<param->nll; i++) {
+    sprintf(filename, "%s.pot.ps.l=%d", param->name,i);
+    fp = fopen(filename, "rb");
+    fread(totpot_.rvcore[i], sizeof(double), param->ngrid, fp);
+    fseek(fp,sizeof(double) ,param->ngrid);
+    fclose(fp);
+  }
+  
+  for (i=0; i<param->nll; i++) {
+    sprintf(filename, "%s.psi.ps.l=%d", param->name,i);
+    fp = fopen(filename, "rb");
+    fread(wfn_.rnl[i], sizeof(double), param->ngrid, fp);
+    fclose(fp);
+  }
+
+  if (param->rpcc > 0.){
+    sprintf(filename, "%s.rho_pcore", param->name);
+    fp = fopen(filename, "rb");
+    fread(rscore_.rscore, sizeof(double), param->ngrid, fp);
+    fclose(fp);
+    }*/
+
+  fp_log = fopen(logfile, "a");
+  fprintf(fp_log,"<<calling: writerecpot>>\n");
+  fclose(fp_log);
+
+  sprintf(filename, "%s.recpot", param->name);
+  fp = fopen(filename, "w");
+
+  writerecpot_(fp, fp_param, &param->psmeth);
+  fclose(fp);
+
+  fp_log = fopen(logfile, "a");
+  fprintf(fp_log, "   ================================================\n");
+  fclose(fp_log);
+  return 0;
+}
+
+void writeparam_(FILE *fpp, FILE *fpp_param, double *ecutev, int *version) {
+  int c;
+  int cut;
+
+  fprintf(fpp, "START COMMENT \n");
+
+  cut = 0.8 * *ecutev;
+  fprintf(fpp, "%-4d  COARSE \n",cut);
+
+  cut = 0.9 * *ecutev;
+  fprintf(fpp, "%-4d  MEDIUM\n",cut);
+
+  cut = *ecutev;
+  fprintf(fpp, "%-4d  FINE\n",cut);
+
+  fprintf(fpp, "Pseudopotential generated by OPIUM \n");
+
+  fprintf(fpp, "############################################################\n");
+
+  /* append the parameter file to the header of the recpot file */
+  fprintf(fpp, "\n");
+  fprintf(fpp, "############################################################\n");
+  fprintf(fpp, "#    Opium Parameter File                                  #\n");
+  fprintf(fpp, "############################################################\n");
+  fprintf(fpp, "\n");
+  rewind(fpp_param);
+  while((c=fgetc(fpp_param)) != EOF) fputc(c, fpp);
+
+
+  fprintf(fpp, "END COMMENT \n");
+  fprintf(fpp, " 3 %d \n",*version);
+}
